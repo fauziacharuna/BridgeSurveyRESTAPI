@@ -116,6 +116,16 @@ app.get('/sistem/search/:keyword', function(req, res){
 
     });
 });
+app.get('/komponen/search/:keyword', function(req, res){
+    let keyword=req.params.keyword;
+
+    mc.query('SELECT * FROM komponen where komponen_name LIKE ?', ['%' + keyword + '%'],function(error,results,fields){
+        if(error) throw error;
+        return res.send({error:false, data:results, message:'Sistem List.'});
+
+    });
+});
+
 
 app.post('/todo', function (req, res) {
  
