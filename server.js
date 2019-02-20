@@ -10,11 +10,11 @@ app.use(bodyParser.urlencoded({
 }));
  
 const mc = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    port:'5700',
-    database: 'BridgeSurvey'
+    host: 'sl-us-south-1-portal.48.dblayer.com',
+    user: 'admin',
+    password: 'KWNLIZRECAGPTTII',
+    port:'17254',
+    database: 'Bridge'
 });
  
 
