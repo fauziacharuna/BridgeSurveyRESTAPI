@@ -121,7 +121,7 @@ app.get('/komponen/search/:keyword', function(req, res){
 
     mc.query('SELECT * FROM komponen where komponen_name LIKE ?', ['%' + keyword + '%'],function(error,results,fields){
         if(error) throw error;
-        return res.send({error:false, data:results, message:'Sistem List.'});
+        return res.send({error:false, data:results, message:'Komponen List.'});
 
     });
 });
