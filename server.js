@@ -9,13 +9,21 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
  
+// const mc = mysql.createConnection({
+//     host: 'sl-us-south-1-portal.48.dblayer.com',
+//     user: 'admin',
+//     password: 'KWNLIZRECAGPTTII',
+//     port:'17254',
+//     database: 'Bridge'
+// });
 const mc = mysql.createConnection({
-    host: 'sl-us-south-1-portal.48.dblayer.com',
-    user: 'admin',
-    password: 'KWNLIZRECAGPTTII',
-    port:'17254',
-    database: 'Bridge'
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    port:'5700',
+    database: 'BridgeSurvey'
 });
+ 
  
 
 // connect to database
@@ -65,6 +73,7 @@ app.get('/siskomsub',function(req,res){
         return res.send({error:false, data:results, message:'Sistem List.'});
     });
 });
+
 
 /*Untuk Mendapatkan suatu nilai berdasar id 
 */
@@ -125,18 +134,23 @@ app.get('/komponen/search/:keyword', function(req, res){
 
     });
 });
-
-
-app.post('/todo', function (req, res) {
+app.post('/sistem', function (req, res) {
  
     let sistem = req.body.sistem;
  
     if (!sistem) {
-        return res.status(400).send({ error:true, message: 'Please provide task' });
+        return res.status(400).send({ error:true, message: 'Please provide sistem' });
     }
  
-    mc.query("INSERT INTO sistem SET ? ", { sistem: sistem }, function (error, results, fields) {
+    mc.query("INSERT INTO sistem SET ? ", { sistem_name: sistem }, function (error, results, fields) {
         if (error) throw error;
-        return res.send({ error: false, data: results, message: 'New task has been created successfully.' });
+        return res.send({ error: false, data: results, message: 'New sistem has been created successfully.' });
     });
 });
+
+
+app.all("*", function (req, res, next) {
+    return res.send('page not found');
+    next();
+});
+ 
