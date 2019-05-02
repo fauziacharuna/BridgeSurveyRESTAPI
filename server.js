@@ -53,7 +53,7 @@ app.get('/komponen', function (req, res) {
 });
 
 app.get('/subkomponen', function (req, res) {
-    mc.query('SELECT * FROM subKomponen', function (error, results, fields) {
+    mc.query('SELECT subKomponen_id,komponen_name,subKomponen_name FROM subkomponen s,komponen k where s.komponen_id = k.komponen_id', function (error, results, fields) {
         if (error) throw error;
         return res.send({ error: false, data: results, message: 'komponen list.' });
     });
