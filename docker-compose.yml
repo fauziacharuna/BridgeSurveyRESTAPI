@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+
+    node:
+        build:
+            context: ./NodeDocker
+            args:
+                - NODE_VERSION=latest
+                - PROJECT_PATH=/opt/app/
+                - NODE_ENV=production
+                - YARN=false
+        volumes:
+            - ../:/opt/app
+        entrypoint: run-nodock "node server.js"
+        tty: true
+
+    mysql:
+        build:
+            context: ./mysql
+            args:
+                - MYSQL_DATABASE=BridgeSurvey
+                - MYSQL_USER=root
+                - MYSQL_PASSWORD=secret
+                - MYSQL_ROOT_PASSWORD=secret
+        volumes:
+            - ./data/mysql/:/var/lib/mysql
+        expose:
+            - "3306"

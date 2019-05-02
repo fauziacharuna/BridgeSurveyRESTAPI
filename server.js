@@ -46,7 +46,7 @@ app.get('/sistem', function (req, res) {
     });
 });
 app.get('/komponen', function (req, res) {
-    mc.query('SELECT * FROM komponen', function (error, results, fields) {
+    mc.query('SELECT komponen_id, komponen_name, sistem_name FROM komponen k, sistem s WHERE k.sistem_id=s.sistem_id', function (error, results, fields) {
         if (error) throw error;
         return res.send({ error: false, data: results, message: 'komponen list.' });
     });
@@ -56,6 +56,24 @@ app.get('/subkomponen', function (req, res) {
     mc.query('SELECT * FROM subKomponen', function (error, results, fields) {
         if (error) throw error;
         return res.send({ error: false, data: results, message: 'komponen list.' });
+    });
+});
+app.get('/bridge', function (req, res) {
+    mc.query('SELECT * FROM bridge', function (error, results, fields) {
+        if (error) throw error;
+        return res.send({ error: false, data: results, message: 'bridge list.' });
+    });
+});
+app.get('/engineer', function (req, res) {
+    mc.query('SELECT * FROM surveyor', function (error, results, fields) {
+        if (error) throw error;
+        return res.send({ error: false, data: results, message: 'bridge list.' });
+    });
+});
+app.get('/answer', function (req, res) {
+    mc.query('SELECT * FROM answer', function (error, results, fields) {
+        if (error) throw error;
+        return res.send({ error: false, data: results, message: 'answer list.' });
     });
 });
 app.get('/siskom',function(req,res){
@@ -101,6 +119,7 @@ app.get('/komponen/:id', function(req, res){
 
     });
 });
+
 
 app.get('/subkomponen/:id', function(req, res){
     let subKomponen_id=req.params.id;
